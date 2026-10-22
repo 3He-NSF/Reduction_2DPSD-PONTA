@@ -1,0 +1,17 @@
+# Local measurements and generated files
+*.dat
+*.edb
+*.t0b
+*.h5
+*.hdf5
+*.png
+DAQ_DATA/
+instrument/
+*_heatmaps/
+config.ini
+h5py_wheels/
+# Python and editor files
+__pycache__/
+*.py[cod]
+.venv*/
+.DS_Store
