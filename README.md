@@ -10,6 +10,37 @@ Manyo/UtsusemiでPONTAのイベントを64 × 64のカウント配列に変換�
 
 測定データ・XML・Utsusemi本体はこのリポジトリに含めません。XMLは測定環境から別途取得し、`instrument/`に配置してください。イベントは`DAQ_DATA/WLS/対象Runフォルダ/`に配置します。
 
+## 入力データの配置
+
+DATファイルはリポジトリ直下の`scan/`フォルダに配置します。設定例の`scan_files`は、その中のファイルを明示的に指定します。フォルダ内の全ファイルを自動で読み込む設定ではありません。
+
+```text
+Reduction_2DPSD-PONTA/
+  reduction_to_hdf5.py
+  read_hdf5.py
+  config.example.ini
+  config.ini
+  scan/
+    PONTA_exp0192_scan0048.dat
+    PONTA_exp0192_scan0049.dat
+  instrument/
+    WiringInfoReadout_WLSF32_NBR_noRG.xml
+    DetectorInfo2d_WLSF32_NBR.xml
+  DAQ_DATA/
+    WLS/
+      WLS000742_20260928/
+        （対象Runのイベントファイル一式）
+```
+
+```ini
+[FILES]
+scan_files =
+    scan/PONTA_exp0192_scan0048.dat
+    scan/PONTA_exp0192_scan0049.dat
+```
+
+`config.ini`をリポジトリ直下に置いた場合の例です。相対パスはINIのあるフォルダを基準に解決します。対象を増やす場合は`scan_files`へ1行ずつ追加してください。`scan/`内のDATは既存の`.gitignore`の`*.dat`によりGit管理から除外されます。
+
 ## リダクション
 
 1. `config.example.ini`を`config.ini`へコピーします。
