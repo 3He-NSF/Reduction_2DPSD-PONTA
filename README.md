@@ -32,8 +32,7 @@ DATの開始・終了日時からDAQ開始を引いた秒数でtime sliceしま�
 /config/config_ini       INI本文
 /config/readout_xml      XML本文
 /config/detector_xml     XML本文
-/scans/scan_0048         dataset: counts[y, x], shape (64, 64)
-/scans/scan_0049         dataset: counts[y, x], shape (64, 64)
+/scans/scan_xxxx         dataset: counts[y, x], shape (64, 64)
 ```
 
 各scan datasetの属性にDAT各列、ヘッダー、run_number、measurement_time_seconds等を保存します。本体は未規格化のcountsです。
@@ -46,22 +45,14 @@ DATの開始・終了日時からDAQ開始を引いた秒数でtime sliceしま�
 python3 -m venv .venv_plot
 source .venv_plot/bin/activate
 python3 -m pip install -r requirements.txt
-python3 read_hdf5.py Scan0048-0049.h5 --scan 48
+python3 read_hdf5.py Scan0048-0049.h5 --scan xx
 ```
 
-`--scan 48`はその番号だけを一覧表示してPNG保存し、操作可能なグラフを開きます。GUI環境が必要です。番号なしでは全スキャンを一覧表示し、PNGを保存して図を閉じます。`--output-dir`で保存先を指定できます。
+`--scan xx`はxxの番号だけを一覧表示してPNG保存し、操作可能なグラフを開きます。GUI環境が必要です。番号なしでは全スキャンを一覧表示し、PNGを保存して図を閉じます。`--output-dir`で保存先を指定できます。
 
 PNGはcountsをmeasurement_time_secondsで割ったcounts/sです。タイトルにc2を表示します。色の上限は図ごとに自動設定されます。HDF5は変更しません。
 
-## エラー時
-
-- Manyoが見つからない：Utsusemi環境と実際のPythonパスを確認。
-- 時間区間が不正：DAT・Run番号・DAQ開始日時の対応を確認。
-- reduction already exists：出力名を変更。
-- イベントが見つからない：イベント基点、Runフォルダ、EDB・T0Bのコピーを確認。
-- Utsusemiの診断ログ：完了パスとカウントを確認し、異常が続く場合はログを保存して担当者へ確認。
-
-## 詳細マニュアル
+## マニュアル
 
 [環境準備・設定・SSLエラー対処を含む手順書](https://docs.google.com/document/d/1aSdkF12Noq1oRS8OzYlhMxLqFlWpYtVgXN26NvQyeaA/edit)
 
